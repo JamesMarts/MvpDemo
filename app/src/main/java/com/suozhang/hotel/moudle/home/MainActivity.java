@@ -1,49 +1,58 @@
 package com.suozhang.hotel.moudle.home;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
+import android.support.design.widget.NavigationView;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
 import com.suozhang.hotel.R;
+import com.suozhang.hotel.moudle.base.BaseActivity;
 
-public class MainActivity extends AppCompatActivity {
+import butterknife.BindView;
 
-    private TextView mTextMessage;
+public class MainActivity extends BaseActivity  implements BottomNavigationView.OnNavigationItemSelectedListener{
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+    @BindView(R.id.nav_view)
+    NavigationView rNavView;
+    @BindView(R.id.navigation)
+    BottomNavigationView rNavigation;
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    Logger.e("test");
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    return true;
-            }
-            return false;
-        }
-
-    };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    protected int attachLayoutRes() {
+        return R.layout.activity_main;
     }
 
+    @Override
+    protected void initInjector() {
+
+    }
+
+    @Override
+    protected void initViews() {
+
+       // rNavigation.setOnNavigationItemSelectedListener(this);
+    }
+
+    @Override
+    protected void updateViews() {
+
+    }
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.navigation_home:
+              //  addFragment(R.id.content, new NewsListFragment());
+                return true;
+            case R.id.navigation_dashboard:
+                Logger.e("test");
+                return true;
+            case R.id.navigation_notifications:
+                return true;
+        }
+        return false;
+    }
 }
