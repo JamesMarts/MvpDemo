@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.suozhang.hotel.moudle.base.BaseFragment">
+    tools:context="com.suozhang.hotel.moudle.video.main.VideoMainFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

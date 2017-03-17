@@ -67,7 +67,7 @@ public class EmptyLayout extends FrameLayout {
         }
         View.inflate(mContext, R.layout.layout_empty_loading, this);
         ButterKnife.bind(this);
-        mEmptyLayout.setBackgroundColor(mBgColor);
+//        mEmptyLayout.setBackgroundColor(mBgColor);
         _switchEmptyView();
     }
 

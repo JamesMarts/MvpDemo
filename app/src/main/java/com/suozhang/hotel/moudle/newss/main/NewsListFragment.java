@@ -1,11 +1,8 @@
-package com.suozhang.hotel.moudle.newss.newslist;
+package com.suozhang.hotel.moudle.newss.main;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.suozhang.hotel.R;
 import com.suozhang.hotel.adapter.NewsMultiItem;
@@ -17,7 +14,6 @@ import com.suozhang.hotel.widget.EmptyLayout;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 
 public class NewsListFragment extends BaseFragment<IBasePresenter> implements INewsListView {
@@ -86,11 +82,5 @@ public class NewsListFragment extends BaseFragment<IBasePresenter> implements IN
 
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
+
 }

@@ -1,4 +1,4 @@
-package com.suozhang.hotel.moudle.newss.newslist;
+package com.suozhang.hotel.moudle.newss.main;
 
 import com.suozhang.hotel.adapter.NewsMultiItem;
 import com.suozhang.hotel.api.bean.NewsInfo;
