@@ -6,7 +6,15 @@ package com.suozhang.hotel.moudle.base;
  */
 
 public interface IBasePresenter {
+      /**
+       * 获取网络数据
+       * */
 
-      void loadData();
+      void getData();
+      /**
+       * 加载更多数据
+       * */
+
+      void getMoreData();
 
 }

@@ -1,6 +1,9 @@
 package com.suozhang.hotel.injector.component;
 
+import android.content.Context;
+
 import com.suozhang.hotel.injector.module.AppModule;
+import com.suozhang.hotel.rxbus.RxBus;
 
 import javax.inject.Singleton;
 
@@ -11,6 +14,14 @@ import dagger.Component;
  */
 @Singleton
 @Component(modules = AppModule.class)
-public class AppComponent {
+public interface AppComponent {
+
+    // provide
+    Context getContext();
+
+    RxBus getRxBus();
+
+//    DaoSession getDaoSession();
+
 
 }
