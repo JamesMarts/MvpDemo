@@ -1,4 +1,4 @@
-package com.suozhang.hotel.moudle.newss.main;
+package com.suozhang.hotel.moudle.news.list;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;

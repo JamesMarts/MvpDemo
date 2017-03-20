@@ -11,6 +11,7 @@ buildscript {
         // in the individual module build.gradle files
         classpath 'me.tatarka:gradle-retrolambda:3.2.2'//lambda配置
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'//dagger2远程工具地址配置     }
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.1'
     }
 }
 

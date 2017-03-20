@@ -24,15 +24,18 @@ import butterknife.OnClick;
  * Created by LIJUWEN on 2017/3/16.
  */
 
+/**
+ * Created by long on 2016/8/23.
+ * 加载、空视图
+ */
 public class EmptyLayout extends FrameLayout {
+
     public static final int STATUS_HIDE = 1001;
     public static final int STATUS_LOADING = 1;
     public static final int STATUS_NO_NET = 2;
     public static final int STATUS_NO_DATA = 3;
-
     private Context mContext;
     private OnRetryListener mOnRetryListener;
-
     private int mEmptyStatus = STATUS_LOADING;
     private int mBgColor;
 
@@ -67,7 +70,7 @@ public class EmptyLayout extends FrameLayout {
         }
         View.inflate(mContext, R.layout.layout_empty_loading, this);
         ButterKnife.bind(this);
-//        mEmptyLayout.setBackgroundColor(mBgColor);
+        mEmptyLayout.setBackgroundColor(mBgColor);
         _switchEmptyView();
     }
 
@@ -91,8 +94,7 @@ public class EmptyLayout extends FrameLayout {
 
     /**
      * 获取状态
-     *
-     * @return 状态
+     * @return  状态
      */
     public int getEmptyStatus() {
         return mEmptyStatus;
@@ -179,6 +181,5 @@ public class EmptyLayout extends FrameLayout {
 
     @Retention(RetentionPolicy.SOURCE)
     @IntDef({STATUS_LOADING, STATUS_NO_NET, STATUS_NO_DATA})
-    public @interface EmptyStatus {
-    }
+    public @interface EmptyStatus{}
 }

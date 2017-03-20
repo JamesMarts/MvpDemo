@@ -8,20 +8,12 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <!--<TextView-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="@string/app_name"-->
-            <!--android:textSize="38sp"-->
-            <!--/>-->
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_news_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-        <com.suozhang.hotel.widget.EmptyLayout
-            android:id="@+id/empty_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></com.suozhang.hotel.widget.EmptyLayout>
 
+        <include layout="@layout/layout_common_empty"/>
     </FrameLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

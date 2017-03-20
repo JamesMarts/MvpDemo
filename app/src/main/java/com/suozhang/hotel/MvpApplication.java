@@ -44,9 +44,8 @@ public class MvpApplication extends Application {
      */
     private void _initInjector() {
         // 这里不做注入操作，只提供一些全局单例数据
-        mAppComponent= DaggerAppComponent.builder().appModule(new AppModule(this,mRxBus)).build();
+        mAppComponent = DaggerAppComponent.builder().appModule(new AppModule(this, mRxBus)).build();
     }
-
 
 
     /**

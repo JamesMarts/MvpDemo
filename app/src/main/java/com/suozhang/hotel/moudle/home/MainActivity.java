@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 
 import com.suozhang.hotel.R;
 import com.suozhang.hotel.moudle.base.BaseActivity;
-import com.suozhang.hotel.moudle.newss.main.NewsListFragment;
+import com.suozhang.hotel.moudle.news.main.NewsMainFragment;
 import com.suozhang.hotel.moudle.photo.main.PhotoMainFragment;
 import com.suozhang.hotel.moudle.video.main.VideoMainFragment;
 
@@ -48,14 +48,12 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
 
         mSparseArray.put(R.id.navigation_news, "News");
         mSparseArray.put(R.id.navigation_photos, "Photo");
-        mSparseArray.put(R.id.navigation_video, "Video");
-       // mNavigation.setOnNavigationItemSelectedListener(this);
-    }
+        mSparseArray.put(R.id.navigation_video, "Video");}
 
     @Override
     protected void updateViews() {
 //  mNavigation.set
-        addFragment(R.id.container,new NewsListFragment(),"News");
+        addFragment(R.id.container, new NewsMainFragment(), "News");
     }
 
 
@@ -63,7 +61,7 @@ public class MainActivity extends BaseActivity implements BottomNavigationView.O
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.navigation_news:
-                replaceFragment(R.id.container, new NewsListFragment(), mSparseArray.get(R.id.navigation_news));
+                replaceFragment(R.id.container, new NewsMainFragment(), mSparseArray.get(R.id.navigation_news));
                 break;
             case R.id.navigation_photos:
                 replaceFragment(R.id.container, new PhotoMainFragment(), mSparseArray.get(R.id.navigation_photos));
