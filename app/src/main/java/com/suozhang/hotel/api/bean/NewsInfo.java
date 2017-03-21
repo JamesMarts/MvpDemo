@@ -390,7 +390,7 @@ public final class NewsInfo implements Parcelable {
             this.url = in.readString();
         }
 
-        public static final Parcelable.Creator<AdData> CREATOR = new Parcelable.Creator<AdData>() {
+        public static final Creator<AdData> CREATOR = new Creator<AdData>() {
             @Override
             public AdData createFromParcel(Parcel source) {
                 return new AdData(source);
@@ -525,7 +525,7 @@ public final class NewsInfo implements Parcelable {
         in.readList(this.imgextra, ImgExtraData.class.getClassLoader());
     }
 
-    public static final Parcelable.Creator<NewsInfo> CREATOR = new Parcelable.Creator<NewsInfo>() {
+    public static final Creator<NewsInfo> CREATOR = new Creator<NewsInfo>() {
         @Override
         public NewsInfo createFromParcel(Parcel source) {
             return new NewsInfo(source);

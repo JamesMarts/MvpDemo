@@ -5,6 +5,8 @@
       <module fileurl="file://$PROJECT_DIR$/MvpDemo.iml" filepath="$PROJECT_DIR$/MvpDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/dagger2/dagger2.iml" filepath="$PROJECT_DIR$/dagger2/dagger2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/downloaderLib/downloaderLib.iml" filepath="$PROJECT_DIR$/downloaderLib/downloaderLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/playerview/playerview.iml" filepath="$PROJECT_DIR$/playerview/playerview.iml" />
     </modules>
   </component>
 </project>

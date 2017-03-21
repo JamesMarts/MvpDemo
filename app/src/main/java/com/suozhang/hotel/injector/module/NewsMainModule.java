@@ -2,7 +2,6 @@ package com.suozhang.hotel.injector.module;
 
 import com.suozhang.hotel.adapter.ViewPagerAdapter;
 import com.suozhang.hotel.injector.FragmentScope;
-import com.suozhang.hotel.local.table.DaoSession;
 import com.suozhang.hotel.moudle.base.IRxBusPresenter;
 import com.suozhang.hotel.moudle.news.main.NewsMainFragment;
 import com.suozhang.hotel.moudle.news.main.NewsMainPresenter;
@@ -25,8 +24,8 @@ public class NewsMainModule {
 
     @FragmentScope
     @Provides
-  public IRxBusPresenter provideIRxBusPresenter(DaoSession daoSession, RxBus rxBus){
-        return new NewsMainPresenter(mView,daoSession.getNewsTypeInfoDao(),rxBus);
+    public IRxBusPresenter provideIRxBusPresenter(RxBus rxBus) {
+        return new NewsMainPresenter(mView,null,  rxBus);
     }
 
     @FragmentScope

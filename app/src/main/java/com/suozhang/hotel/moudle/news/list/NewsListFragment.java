@@ -17,7 +17,7 @@ import butterknife.BindView;
 
 
 public class NewsListFragment extends BaseFragment<IBasePresenter> implements INewsListView {
-
+    private static final String NEWS_TYPE_KEY = "NewsTypeKey";
 
     @BindView(R.id.rv_news_list)
     RecyclerView mRvNewsList;
@@ -25,6 +25,14 @@ public class NewsListFragment extends BaseFragment<IBasePresenter> implements IN
     EmptyLayout mEmptyLayout;
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout mSwipeRefresh;
+
+    public static NewsListFragment getInstance(String title) {
+        NewsListFragment newsListFragment = new NewsListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(NEWS_TYPE_KEY, title);
+        newsListFragment.setArguments(bundle);
+        return newsListFragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
