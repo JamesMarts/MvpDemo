@@ -1,21 +1,11 @@
 package com.suozhang.hotel.api;
 
 import android.support.annotation.NonNull;
-import android.text.TextUtils;
 
 import com.orhanobut.logger.Logger;
 import com.suozhang.hotel.MvpApplication;
-import com.suozhang.hotel.api.bean.NewsDetailInfo;
 import com.suozhang.hotel.api.bean.NewsInfo;
-import com.suozhang.hotel.api.bean.PhotoInfo;
-import com.suozhang.hotel.api.bean.PhotoSetInfo;
-import com.suozhang.hotel.api.bean.SpecialInfo;
-import com.suozhang.hotel.api.bean.WelfarePhotoInfo;
-import com.suozhang.hotel.api.bean.WelfarePhotoList;
-import com.suozhang.hotel.local.table.BeautyPhotoInfo;
-import com.suozhang.hotel.local.table.VideoInfo;
 import com.suozhang.hotel.util.utils.NetUtil;
-import com.suozhang.hotel.util.utils.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,9 +27,8 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+
 
 /**
  * Created by long on 2016/8/22.
@@ -166,237 +155,36 @@ public class RetrofitService {
     }
 
     /************************************ API *******************************************/
-
     /**
      * 获取新闻列表
-     * @return
-     */
-    public static Observable<NewsInfo> getNewsList(String newsId, int page) {
-        String type;
+     **/
+
+    public static Observable<NewsInfo> getNewsInfo(String newsId, int page) {
+        String type = "";
+        //判断是不是新闻专题
         if (newsId.equals(HEAD_LINE_NEWS)) {
             type = "headline";
         } else {
             type = "list";
         }
-        return sNewsService.getNewsList(type, newsId, page * INCREASE_PAGE)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(_flatMapNews(newsId));
+        return  null;
+//                sNewsService.getNewsList(type, newsId, page * INCREASE_PAGE)
+//                .subscribeOn(Schedulers.io())
+//                .unsubscribeOn(Schedulers.io())
+//                .subscribeOn(AndroidSchedulers.mainThread())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .flatMap(flatMapNews(newsId));
+
     }
 
-    /**
-     * 获取专题数据
-     * @param specialId
-     * @return
-     */
-    public static Observable<SpecialInfo> getSpecial(String specialId) {
-        return sNewsService.getSpecial(specialId)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(_flatMapSpecial(specialId));
-    }
 
-    /**
-     * 获取新闻详情
-     * @param newsId 新闻ID
-     * @return
-     */
-    public static Observable<NewsDetailInfo> getNewsDetail(final String newsId) {
-        return sNewsService.getNewsDetail(newsId)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(new Func1<Map<String, NewsDetailInfo>, Observable<NewsDetailInfo>>() {
-                    @Override
-                    public Observable<NewsDetailInfo> call(Map<String, NewsDetailInfo> newsDetailMap) {
-                        return Observable.just(newsDetailMap.get(newsId));
-                    }
-                });
-    }
-
-    /**
-     * 获取图集
-     * @param photoId 图集ID
-     * @return
-     */
-    public static Observable<PhotoSetInfo> getPhotoSet(String photoId) {
-        return sNewsService.getPhotoSet(StringUtils.clipPhotoSetId(photoId))
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread());
-    }
-
-    /**
-     * 获取图片列表
-     * @return
-     */
-    public static Observable<List<PhotoInfo>> getPhotoList() {
-        return sNewsService.getPhotoList()
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread());
-    }
-
-    /**
-     * 获取更多图片列表
-     * @return
-     */
-    public static Observable<List<PhotoInfo>> getPhotoMoreList(String setId) {
-        return sNewsService.getPhotoMoreList(setId)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread());
-    }
-
-    /**
-     * 获取美女图片
-     * 注: 因为网易这个原接口参数一大堆，我只传了部分参数，返回的数据会出现图片重复的情况，请不要在意这个问题- -
-     * @return
-     */
-    public static Observable<List<BeautyPhotoInfo>> getBeautyPhoto(int page) {
-        return sNewsService.getBeautyPhoto(page * INCREASE_PAGE)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(_flatMapPhotos());
-    }
-
-    /**
-     * 获取福利图片
-     * @return
-     */
-    public static Observable<WelfarePhotoInfo> getWelfarePhoto(int page) {
-        return sWelfareService.getWelfarePhoto(page)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(_flatMapWelfarePhotos());
-    }
-
-    /**
-     * 获取视频列表
-     * @return
-     */
-    public static Observable<List<VideoInfo>> getVideoList(String videoId, int page) {
-        return sNewsService.getVideoList(videoId, page * INCREASE_PAGE / 2)
-                .subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io())
-                .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(_flatMapVideo(videoId));
-    }
-
-    /******************************************* 转换器 **********************************************/
-
-    /**
-     * 转换器，因为 Key 是动态变动，所以用这种不太合适
-     * @param <T>
-     */
-    @Deprecated
-    public static class FlatMapTransformer<T> implements Observable.Transformer<Map<String, List<T>>, T> {
-
-        private String mMapKey;
-
-        public FlatMapTransformer<T> setMapKey(String mapKey) {
-            mMapKey = mapKey;
-            return this;
-        }
-
-        @Override
-        public Observable<T> call(Observable<Map<String, List<T>>> mapObservable) {
-            return  mapObservable.flatMap(new Func1<Map<String, List<T>>, Observable<T>>() {
-                @Override
-                public Observable<T> call(Map<String, List<T>> stringListMap) {
-                    if (TextUtils.isEmpty(mMapKey)) {
-                        return Observable.error(new Throwable("Map Key is empty"));
-                    }
-                    return Observable.from(stringListMap.get(mMapKey));
-                }
-            }).subscribeOn(Schedulers.io())
-                    .unsubscribeOn(Schedulers.io())
-                    .subscribeOn(AndroidSchedulers.mainThread())
-                    .observeOn(AndroidSchedulers.mainThread());
-        }
-    }
-
-    /**
-     * 类型转换
-     * @param typeStr 新闻类型
-     * @return
-     */
-    private static Func1<Map<String, List<NewsInfo>>, Observable<NewsInfo>> _flatMapNews(final String typeStr) {
+    public static Func1<Map<String, List<NewsInfo>>, Observable<NewsInfo>> flatMapNews(final String newsType) {
         return new Func1<Map<String, List<NewsInfo>>, Observable<NewsInfo>>() {
             @Override
-            public Observable<NewsInfo> call(Map<String, List<NewsInfo>> newsListMap) {
-                return Observable.from(newsListMap.get(typeStr));
+            public Observable<NewsInfo> call(Map<String, List<NewsInfo>> stringListMap) {
+                return Observable.from(stringListMap.get(newsType));
             }
         };
     }
 
-    /**
-     * 类型转换
-     * @param typeStr 视频类型
-     * @return
-     */
-    private static Func1<Map<String, List<VideoInfo>>, Observable<List<VideoInfo>>> _flatMapVideo(final String typeStr) {
-        return new Func1<Map<String, List<VideoInfo>>, Observable<List<VideoInfo>>>() {
-            @Override
-            public Observable<List<VideoInfo>> call(Map<String, List<VideoInfo>> newsListMap) {
-                return Observable.just(newsListMap.get(typeStr));
-            }
-        };
-    }
-
-    /**
-     * 类型转换
-     * @param specialId 专题id
-     * @return
-     */
-    private static Func1<Map<String, SpecialInfo>, Observable<SpecialInfo>> _flatMapSpecial(final String specialId) {
-        return new Func1<Map<String, SpecialInfo>, Observable<SpecialInfo>>() {
-            @Override
-            public Observable<SpecialInfo> call(Map<String, SpecialInfo> specialMap) {
-                return Observable.just(specialMap.get(specialId));
-            }
-        };
-    }
-
-    /**
-     * 类型转换
-     * @return
-     */
-    private static Func1<Map<String, List<BeautyPhotoInfo>>, Observable<List<BeautyPhotoInfo>>> _flatMapPhotos() {
-        return new Func1<Map<String, List<BeautyPhotoInfo>>, Observable<List<BeautyPhotoInfo>>>() {
-            @Override
-            public Observable<List<BeautyPhotoInfo>> call(Map<String, List<BeautyPhotoInfo>> newsListMap) {
-                return Observable.just(newsListMap.get("美女"));
-            }
-        };
-    }
-
-    /**
-     * 类型转换
-     * @return
-     */
-    private static Func1<WelfarePhotoList, Observable<WelfarePhotoInfo>> _flatMapWelfarePhotos() {
-        return new Func1<WelfarePhotoList, Observable<WelfarePhotoInfo>>() {
-            @Override
-            public Observable<WelfarePhotoInfo> call(WelfarePhotoList welfarePhotoList) {
-                if (welfarePhotoList.getResults().size() == 0) {
-                    return Observable.empty();
-                }
-                return Observable.from(welfarePhotoList.getResults());
-            }
-        };
-    }
 }

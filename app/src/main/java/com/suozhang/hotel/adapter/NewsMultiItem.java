@@ -2,7 +2,7 @@ package com.suozhang.hotel.adapter;
 
 import android.support.annotation.IntDef;
 
-import com.chad.library.adapter.base.entity.MultiItemEntity;
+import com.dl7.recycler.entity.MultiItemEntity;
 import com.suozhang.hotel.api.bean.NewsInfo;
 
 import java.lang.annotation.Retention;
@@ -12,7 +12,7 @@ import java.lang.annotation.RetentionPolicy;
  * Created by LIJUWEN on 2017/3/16.
  */
 
-public class NewsMultiItem  implements MultiItemEntity {
+public class NewsMultiItem extends MultiItemEntity {
 
     @Override
     public int getItemType() {
@@ -24,6 +24,7 @@ public class NewsMultiItem  implements MultiItemEntity {
     private NewsInfo mNewsBean;
 
     public NewsMultiItem(@NewsItemType int itemType, NewsInfo newsBean) {
+        super(itemType);
 
         mNewsBean = newsBean;
     }

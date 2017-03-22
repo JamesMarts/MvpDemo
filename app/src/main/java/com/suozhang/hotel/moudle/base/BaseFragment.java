@@ -36,7 +36,7 @@ public abstract class BaseFragment<T extends IBasePresenter> extends RxFragment 
     @Inject
     public T mPresenter;
 
-    private Context mContext;
+    protected Context mContext;
     //缓存fragment View
     private View mRootView;
     //是否是多Item
